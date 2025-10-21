@@ -1,6 +1,9 @@
 using AutomatedInventory.Application.Interfaces;
+using AutomatedInventory.Infrastructure.Identity;
+using AutomatedInventory.Infrastructure.Options;
 using AutomatedInventory.Infrastructure.Persistence;
 using AutomatedInventory.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +27,23 @@ public static class DependencyInjection
                 options.UseInMemoryDatabase("AutomatedInventoryDb");
             }
         });
+
+        services.AddIdentityCore<ApplicationUser>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+            })
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<AutomatedInventoryDbContext>();
+
+        services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+
+        services.AddScoped<ITokenService, JwtTokenService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IdentitySeeder>();
 
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<ISupplierService, SupplierService>();

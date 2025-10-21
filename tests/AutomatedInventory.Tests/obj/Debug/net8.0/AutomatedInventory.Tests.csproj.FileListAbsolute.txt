@@ -102,3 +102,4 @@ C:\Users\Kuraimi\Desktop\Server\tests\AutomatedInventory.Tests\obj\Debug\net8.0\
 C:\Users\Kuraimi\Desktop\Server\tests\AutomatedInventory.Tests\obj\Debug\net8.0\AutomatedInventory.Tests.pdb
 C:\Users\Kuraimi\Desktop\Server\tests\AutomatedInventory.Tests\obj\Debug\net8.0\AutomatedInventory.Tests.genruntimeconfig.cache
 C:\Users\Kuraimi\Desktop\Server\tests\AutomatedInventory.Tests\obj\Debug\net8.0\ref\AutomatedInventory.Tests.dll
+C:\Users\Kuraimi\Desktop\Server\tests\AutomatedInventory.Tests\obj\Debug\net8.0\AutomatedInventory.Tests.sourcelink.json

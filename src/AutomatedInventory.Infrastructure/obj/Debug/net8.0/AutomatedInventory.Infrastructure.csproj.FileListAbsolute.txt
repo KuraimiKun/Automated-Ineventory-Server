@@ -15,3 +15,4 @@ C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Infrastructure\obj\Debug\
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Infrastructure\obj\Debug\net8.0\refint\AutomatedInventory.Infrastructure.dll
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Infrastructure\obj\Debug\net8.0\AutomatedInventory.Infrastructure.pdb
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Infrastructure\obj\Debug\net8.0\ref\AutomatedInventory.Infrastructure.dll
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Infrastructure\obj\Debug\net8.0\AutomatedInventory.Infrastructure.sourcelink.json

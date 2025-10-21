@@ -9,3 +9,4 @@ C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Debug\net8.0\A
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Debug\net8.0\refint\AutomatedInventory.Domain.dll
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Debug\net8.0\AutomatedInventory.Domain.pdb
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Debug\net8.0\ref\AutomatedInventory.Domain.dll
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Debug\net8.0\AutomatedInventory.Domain.sourcelink.json

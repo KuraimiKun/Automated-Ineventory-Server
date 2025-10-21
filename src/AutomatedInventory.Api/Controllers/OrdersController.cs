@@ -1,11 +1,14 @@
+using AutomatedInventory.Application.Constants;
 using AutomatedInventory.Application.Interfaces;
 using AutomatedInventory.Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutomatedInventory.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = RoleNames.Admin + "," + RoleNames.Cashier)]
 public sealed class OrdersController : ControllerBase
 {
     private readonly IOrderService _orderService;

@@ -1,9 +1,12 @@
 using AutomatedInventory.Domain.Entities;
+using AutomatedInventory.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedInventory.Infrastructure.Persistence;
 
-public sealed class AutomatedInventoryDbContext : DbContext
+public sealed class AutomatedInventoryDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public AutomatedInventoryDbContext(DbContextOptions<AutomatedInventoryDbContext> options)
         : base(options)

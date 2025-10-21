@@ -1,11 +1,14 @@
+using AutomatedInventory.Application.Constants;
 using AutomatedInventory.Application.Interfaces;
 using AutomatedInventory.Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AutomatedInventory.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
 public sealed class ProductsController : ControllerBase
 {
     private readonly IProductService _productService;

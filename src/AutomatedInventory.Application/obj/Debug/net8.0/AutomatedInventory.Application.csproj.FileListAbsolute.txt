@@ -13,3 +13,4 @@ C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Application\obj\Debug\net
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Application\obj\Debug\net8.0\refint\AutomatedInventory.Application.dll
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Application\obj\Debug\net8.0\AutomatedInventory.Application.pdb
 C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Application\obj\Debug\net8.0\ref\AutomatedInventory.Application.dll
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Application\obj\Debug\net8.0\AutomatedInventory.Application.sourcelink.json
