@@ -8,7 +8,7 @@ namespace AutomatedInventory.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = RoleNames.Admin)]
+[Authorize]
 public sealed class SuppliersController : ControllerBase
 {
     private readonly ISupplierService _supplierService;
@@ -19,6 +19,7 @@ public sealed class SuppliersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> GetSuppliers(CancellationToken cancellationToken)
     {
         var suppliers = await _supplierService.GetAsync(cancellationToken);
@@ -26,6 +27,7 @@ public sealed class SuppliersController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> GetSupplier(Guid id, CancellationToken cancellationToken)
     {
         var supplier = await _supplierService.GetByIdAsync(id, cancellationToken);
@@ -33,6 +35,7 @@ public sealed class SuppliersController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> CreateSupplier([FromBody] UpsertSupplierRequest request, CancellationToken cancellationToken)
     {
         var created = await _supplierService.CreateAsync(request, cancellationToken);
@@ -40,6 +43,7 @@ public sealed class SuppliersController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> UpdateSupplier(Guid id, [FromBody] UpsertSupplierRequest request, CancellationToken cancellationToken)
     {
         var updated = await _supplierService.UpdateAsync(id, request, cancellationToken);
@@ -47,6 +51,7 @@ public sealed class SuppliersController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin)]
     public async Task<IActionResult> DeleteSupplier(Guid id, CancellationToken cancellationToken)
     {
         var deleted = await _supplierService.DeleteAsync(id, cancellationToken);

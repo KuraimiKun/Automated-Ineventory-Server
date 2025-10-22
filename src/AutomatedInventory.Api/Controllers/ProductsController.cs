@@ -8,7 +8,7 @@ namespace AutomatedInventory.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
+[Authorize]
 public sealed class ProductsController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -19,6 +19,7 @@ public sealed class ProductsController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager + "," + RoleNames.Cashier)]
     public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
     {
         var products = await _productService.GetAsync(cancellationToken);
@@ -26,6 +27,7 @@ public sealed class ProductsController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager + "," + RoleNames.Cashier)]
     public async Task<IActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
         var product = await _productService.GetByIdAsync(id, cancellationToken);
@@ -33,6 +35,7 @@ public sealed class ProductsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> CreateProduct([FromBody] UpsertProductRequest request, CancellationToken cancellationToken)
     {
         var created = await _productService.CreateAsync(request, cancellationToken);
@@ -40,6 +43,7 @@ public sealed class ProductsController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] UpsertProductRequest request, CancellationToken cancellationToken)
     {
         var updated = await _productService.UpdateAsync(id, request, cancellationToken);
@@ -47,6 +51,7 @@ public sealed class ProductsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin)]
     public async Task<IActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
     {
         var deleted = await _productService.DeleteAsync(id, cancellationToken);
@@ -54,6 +59,7 @@ public sealed class ProductsController : ControllerBase
     }
 
     [HttpPost("adjust-stock")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> AdjustStock([FromBody] AdjustStockRequest request, CancellationToken cancellationToken)
     {
         var result = await _productService.AdjustStockAsync(request, cancellationToken);

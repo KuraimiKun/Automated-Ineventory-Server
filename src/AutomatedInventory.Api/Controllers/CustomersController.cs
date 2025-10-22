@@ -8,7 +8,7 @@ namespace AutomatedInventory.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = RoleNames.Admin)]
+[Authorize]
 public sealed class CustomersController : ControllerBase
 {
     private readonly ICustomerService _customerService;
@@ -19,6 +19,7 @@ public sealed class CustomersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager + "," + RoleNames.Cashier)]
     public async Task<IActionResult> GetCustomers(CancellationToken cancellationToken)
     {
         var customers = await _customerService.GetAsync(cancellationToken);
@@ -26,6 +27,7 @@ public sealed class CustomersController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager + "," + RoleNames.Cashier)]
     public async Task<IActionResult> GetCustomer(Guid id, CancellationToken cancellationToken)
     {
         var customer = await _customerService.GetByIdAsync(id, cancellationToken);
@@ -33,6 +35,7 @@ public sealed class CustomersController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> CreateCustomer([FromBody] UpsertCustomerRequest request, CancellationToken cancellationToken)
     {
         var created = await _customerService.CreateAsync(request, cancellationToken);
@@ -40,6 +43,7 @@ public sealed class CustomersController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin + "," + RoleNames.InventoryManager)]
     public async Task<IActionResult> UpdateCustomer(Guid id, [FromBody] UpsertCustomerRequest request, CancellationToken cancellationToken)
     {
         var updated = await _customerService.UpdateAsync(id, request, cancellationToken);
@@ -47,6 +51,7 @@ public sealed class CustomersController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = RoleNames.Admin)]
     public async Task<IActionResult> DeleteCustomer(Guid id, CancellationToken cancellationToken)
     {
         var deleted = await _customerService.DeleteAsync(id, cancellationToken);
