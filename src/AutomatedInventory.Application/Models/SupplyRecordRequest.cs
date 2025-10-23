@@ -4,5 +4,5 @@ public sealed record SupplyRecordRequest(
     Guid SupplierId,
     Guid ProductId,
     int QuantityReceived,
-    string ReferenceNumber,
-    string Notes);
+    string? ReferenceNumber,
+    string? Notes);

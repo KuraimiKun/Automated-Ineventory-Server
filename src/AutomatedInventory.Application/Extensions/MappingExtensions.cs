@@ -25,9 +25,18 @@ public static class MappingExtensions
             order.Lines.Select(line => new OrderLineDto(line.ProductId, line.ProductName, line.Quantity, line.UnitPrice)).ToArray(),
             order.TotalAmount);
 
-    public static SupplyRecordDto ToDto(this SupplyRecord record) =>
-        new(record.Id, record.SupplierId, record.ProductId, record.QuantityReceived, record.ReceivedDateUtc, record.ReferenceNumber, record.Notes);
+    public static SupplyRecordDto ToDto(this SupplyRecord record, Supplier supplier, Product product) =>
+        new(
+            record.Id,
+            record.SupplierId,
+            supplier.CompanyName,
+            record.ProductId,
+            product.Name,
+            record.QuantityReceived,
+            record.ReceivedDateUtc,
+            record.ReferenceNumber,
+            record.Notes);
 
     public static TransactionSummaryDto ToDto(this InventoryTransaction transaction, string productName) =>
-        new(transaction.Id, productName, transaction.Quantity, transaction.TotalAmount, transaction.CreatedUtc);
+        new(transaction.Id, productName, transaction.Type, transaction.Quantity, transaction.TotalAmount, transaction.CreatedUtc);
 }

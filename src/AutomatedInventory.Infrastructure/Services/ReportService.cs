@@ -64,6 +64,7 @@ public sealed class ReportService : IReportService
                 (transaction, product) => new TransactionSummaryDto(
                     transaction.Id,
                     product.Name,
+                    transaction.Type,
                     transaction.Quantity,
                     Math.Round(transaction.UnitPrice * transaction.Quantity, 2),
                     transaction.CreatedUtc))
@@ -75,23 +76,28 @@ public sealed class ReportService : IReportService
             .Where(order => !filter.FromUtc.HasValue || order.OrderedAtUtc >= filter.FromUtc.Value)
             .Where(order => !filter.ToUtc.HasValue || order.OrderedAtUtc <= filter.ToUtc.Value);
 
-        var customerSummaries = await filteredOrders
-            .GroupJoin(
-                _dbContext.OrderLines.AsNoTracking(),
-                order => order.Id,
+        var orderLinesWithCustomers = _dbContext.OrderLines
+            .AsNoTracking()
+            .Join(
+                filteredOrders,
                 line => line.SalesOrderId,
-                (order, lines) => new
+                order => order.Id,
+                (line, order) => new
                 {
                     order.CustomerId,
                     order.CustomerName,
-                    OrderTotal = lines.Sum(line => line.Quantity * line.UnitPrice)
-                })
-            .GroupBy(x => new { x.CustomerId, x.CustomerName })
+                    OrderId = order.Id,
+                    line.Quantity,
+                    line.UnitPrice
+                });
+
+        var customerSummaries = await orderLinesWithCustomers
+            .GroupBy(entry => new { entry.CustomerId, entry.CustomerName })
             .Select(group => new CustomerPurchaseSummaryDto(
                 group.Key.CustomerId,
                 group.Key.CustomerName,
-                group.Sum(x => x.OrderTotal),
-                group.Count()))
+                group.Sum(item => item.UnitPrice * item.Quantity),
+                group.Select(item => item.OrderId).Distinct().Count()))
             .OrderByDescending(summary => summary.TotalSpent)
             .Take(10)
             .ToListAsync(cancellationToken);

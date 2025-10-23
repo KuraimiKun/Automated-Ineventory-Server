@@ -1,3 +1,5 @@
+using AutomatedInventory.Domain.Enums;
+
 namespace AutomatedInventory.Application.DTOs;
 
 public sealed record InventoryReportDto(
@@ -9,6 +11,7 @@ public sealed record InventoryReportDto(
 public sealed record TransactionSummaryDto(
     Guid TransactionId,
     string ProductName,
+    TransactionType Type,
     int Quantity,
     decimal TotalAmount,
     DateTime OccurredAtUtc);

@@ -21,8 +21,13 @@ public sealed class InventoryController : ControllerBase
     [HttpPost("supply")]
     public async Task<IActionResult> RecordSupply([FromBody] SupplyRecordRequest request, CancellationToken cancellationToken)
     {
-        var result = await _inventoryService.RecordSupplyAsync(request, cancellationToken);
-        return result ? NoContent() : BadRequest("Unable to record supply. Ensure supplier and product exist.");
+        var record = await _inventoryService.RecordSupplyAsync(request, cancellationToken);
+        if (record is null)
+        {
+            return BadRequest("Unable to record supply. Ensure supplier and product exist.");
+        }
+
+        return CreatedAtAction(nameof(GetSupplyHistory), new { productId = record.ProductId }, record);
     }
 
     [HttpGet("history/{productId:guid}")]
