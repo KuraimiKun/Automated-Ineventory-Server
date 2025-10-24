@@ -20,6 +20,7 @@ public sealed class AutomatedInventoryDbContext : IdentityDbContext<ApplicationU
     public DbSet<SalesOrderLine> OrderLines => Set<SalesOrderLine>();
     public DbSet<InventoryTransaction> Transactions => Set<InventoryTransaction>();
     public DbSet<SupplyRecord> SupplyRecords => Set<SupplyRecord>();
+    public DbSet<UserActivity> UserActivities => Set<UserActivity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,5 +50,8 @@ public sealed class AutomatedInventoryDbContext : IdentityDbContext<ApplicationU
         modelBuilder.Entity<Supplier>()
             .HasIndex(supplier => supplier.Email)
             .IsUnique();
+
+        modelBuilder.Entity<UserActivity>()
+            .HasIndex(activity => new { activity.UserId, activity.OccurredAtUtc });
     }
 }

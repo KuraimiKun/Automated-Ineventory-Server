@@ -39,4 +39,7 @@ public static class MappingExtensions
 
     public static TransactionSummaryDto ToDto(this InventoryTransaction transaction, string productName) =>
         new(transaction.Id, productName, transaction.Type, transaction.Quantity, transaction.TotalAmount, transaction.CreatedUtc);
+
+    public static UserActivityDto ToDto(this UserActivity activity) =>
+        new(activity.Id, activity.ActivityType, activity.Description, activity.OccurredAtUtc);
 }

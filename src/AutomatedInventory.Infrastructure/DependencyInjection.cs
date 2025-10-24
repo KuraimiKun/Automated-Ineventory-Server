@@ -43,7 +43,8 @@ public static class DependencyInjection
 
         services.AddScoped<ITokenService, JwtTokenService>();
         services.AddScoped<IAuthService, AuthService>();
-    services.AddScoped<IUserManagementService, UserManagementService>();
+        services.AddScoped<IUserActivityService, UserActivityService>();
+        services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IdentitySeeder>();
 
         services.AddScoped<ICustomerService, CustomerService>();

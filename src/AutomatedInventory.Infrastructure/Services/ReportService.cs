@@ -76,7 +76,7 @@ public sealed class ReportService : IReportService
             .Where(order => !filter.FromUtc.HasValue || order.OrderedAtUtc >= filter.FromUtc.Value)
             .Where(order => !filter.ToUtc.HasValue || order.OrderedAtUtc <= filter.ToUtc.Value);
 
-        var orderLinesWithCustomers = _dbContext.OrderLines
+        var orderTotalsQuery = _dbContext.OrderLines
             .AsNoTracking()
             .Join(
                 filteredOrders,
@@ -89,18 +89,27 @@ public sealed class ReportService : IReportService
                     OrderId = order.Id,
                     line.Quantity,
                     line.UnitPrice
-                });
+                })
+            .GroupBy(entry => new { entry.CustomerId, entry.CustomerName, entry.OrderId })
+            .Select(group => new
+            {
+                group.Key.CustomerId,
+                group.Key.CustomerName,
+                OrderTotal = group.Sum(item => item.UnitPrice * item.Quantity)
+            });
 
-        var customerSummaries = await orderLinesWithCustomers
+        var orderTotals = await orderTotalsQuery.ToListAsync(cancellationToken);
+
+        var customerSummaries = orderTotals
             .GroupBy(entry => new { entry.CustomerId, entry.CustomerName })
             .Select(group => new CustomerPurchaseSummaryDto(
                 group.Key.CustomerId,
                 group.Key.CustomerName,
-                group.Sum(item => item.UnitPrice * item.Quantity),
-                group.Select(item => item.OrderId).Distinct().Count()))
+                group.Sum(item => item.OrderTotal),
+                group.Count()))
             .OrderByDescending(summary => summary.TotalSpent)
             .Take(10)
-            .ToListAsync(cancellationToken);
+            .ToArray();
 
         return new InventoryReportDto(
             DateTime.UtcNow,
