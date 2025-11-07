@@ -283,6 +283,39 @@ namespace AutomatedInventory.Infrastructure.Migrations
                     b.ToTable("SupplyRecords");
                 });
 
+            modelBuilder.Entity("AutomatedInventory.Domain.Entities.UserActivity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OccurredAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId", "OccurredAtUtc");
+
+                    b.ToTable("UserActivities");
+                });
+
             modelBuilder.Entity("AutomatedInventory.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
