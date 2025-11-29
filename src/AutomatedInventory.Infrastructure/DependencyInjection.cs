@@ -20,7 +20,7 @@ public static class DependencyInjection
         {
             if (!string.IsNullOrWhiteSpace(connectionString))
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure());
             }
             else
             {

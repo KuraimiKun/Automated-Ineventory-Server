@@ -5,6 +5,8 @@ using AutomatedInventory.Infrastructure.Identity;
 using AutomatedInventory.Infrastructure.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+using AutomatedInventory.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +67,9 @@ app.UseAuthorization();
 using (var scope = app.Services.CreateScope())
 {
     var seeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+    // Ensure database schema is applied before seeding
+    var db = scope.ServiceProvider.GetRequiredService<AutomatedInventoryDbContext>();
+    await db.Database.MigrateAsync();
     await seeder.SeedAsync();
 }
 

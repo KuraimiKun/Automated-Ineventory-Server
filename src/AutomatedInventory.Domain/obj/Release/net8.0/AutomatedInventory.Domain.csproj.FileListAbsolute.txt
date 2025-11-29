@@ -1,0 +1,12 @@
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\bin\Release\net8.0\AutomatedInventory.Domain.deps.json
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\bin\Release\net8.0\AutomatedInventory.Domain.dll
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\bin\Release\net8.0\AutomatedInventory.Domain.pdb
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.AssemblyInfoInputs.cache
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.AssemblyInfo.cs
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.sourcelink.json
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.dll
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\refint\AutomatedInventory.Domain.dll
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\AutomatedInventory.Domain.pdb
+C:\Users\Kuraimi\Desktop\Server\src\AutomatedInventory.Domain\obj\Release\net8.0\ref\AutomatedInventory.Domain.dll
