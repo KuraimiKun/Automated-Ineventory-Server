@@ -19,7 +19,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevCors", policy =>
     {
-        policy.WithOrigins("https://localhost:8080", "http://localhost:8080")
+        policy.WithOrigins(
+                  "https://localhost:8080", 
+                  "http://localhost:8080",
+                  "https://oyster-app-2-qg588.ondigitalocean.app",
+                  "https://aimsenv.online"
+              )
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
